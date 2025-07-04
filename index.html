@@ -1,22 +1,74 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>查成绩</title></head>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>查成绩</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      min-width: 300px;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
 <body>
-  <h3>输入姓名查成绩</h3>
-  <input id="name" placeholder="请输入姓名">
-  <button onclick="check()">查询</button>
-  <p id="result"></p>
+  <div class="container">
+    <h3>输入姓名查成绩</h3>
+    <input id="name" placeholder="请输入姓名">
+    <button onclick="check()">查询</button>
+    <p id="result"></p>
+  </div>
 
   <script>
     const scores = {
-      "张三": 95,
-      "李四": 88,
-      "王五": 76
+      "张三": { 语文: 95, 数学: 90 },
+      "李四": { 语文: 88, 数学: 85 },
+      "王五": { 语文: 76, 数学: 80 }
     };
 
     function check() {
       let name = document.getElementById('name').value.trim();
-      let result = scores[name] !== undefined ? `成绩：${scores[name]}` : "查无此人";
+      let data = scores[name];
+      let result = "";
+
+      if (data) {
+        result = `语文：${data.语文}，数学：${data.数学}`;
+      } else {
+        result = "查无此人";
+      }
+
       document.getElementById('result').innerText = result;
     }
   </script>
